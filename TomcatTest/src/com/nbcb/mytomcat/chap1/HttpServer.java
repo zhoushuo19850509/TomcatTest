@@ -1,5 +1,8 @@
 package com.nbcb.mytomcat.chap1;
 
+import com.nbcb.mytomcat.chap2.ServletProcessor1;
+
+import javax.servlet.ServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,11 +21,6 @@ public class HttpServer {
 	
 	private static final String SHUTDOWN_COMMAND = "/SHUTDOWN";
 
-	/**
-	 * this dir contains the static resource of the app server
-	 */
-	public static final String WEB_ROOT = System.getProperty("user.dir") +
-			File.separator +"webroot";
 
 	/**
 	 * the tag of whether the app server is shutdown
@@ -75,7 +73,22 @@ public class HttpServer {
 				 */
 				Response response = new Response(output);
 				response.setRequest(request);
-				response.sendStaticResource();
+
+				if(request.getUri().contains("servlet")){
+					/**
+					 * if the request url contains the important key "servlet"
+					 * it means ,the client is accessing the servlet
+					 */
+					ServletProcessor1 processor1 = new ServletProcessor1();
+					processor1.process(request,response);
+
+				}else{
+					/**
+					 * else , the client is requesting static resource
+					 */
+					response.sendStaticResource();
+				}
+
 				
 				/**
 				 * check whether the client want to shutdown the connection
