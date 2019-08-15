@@ -87,6 +87,11 @@ public class Request implements ServletRequest{
 		}
 		System.out.println("original url: " + requestString);
 		System.out.println("parsed url: " + parsedUri);
+
+		int index3 = -1;
+		index3 = requestString.indexOf("\n");
+		System.out.println("index3: " + index3);
+
 		if(parsedUri != "" && parsedUri != null && parsedUri.length() > 0){
 			return  parsedUri;
 		}else{
