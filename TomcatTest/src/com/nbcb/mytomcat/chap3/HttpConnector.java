@@ -15,12 +15,12 @@ public class HttpConnector implements Runnable {
     @Override
     public void run() {
 
-        ServerSocket server = null;
+        ServerSocket serverSocket = null;
 
         int port = 8080;
 
         try {
-            server = new ServerSocket(port ,1 , InetAddress.getByName("127.0.0.1"));
+            serverSocket = new ServerSocket(port ,1 , InetAddress.getByName("127.0.0.1"));
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -36,7 +36,13 @@ public class HttpConnector implements Runnable {
              * accept the incoming connection
              */
             try {
-                socket = server.accept();
+                /**
+                 * 接收来自客户端的socket请求，交由HttpProcessor处理
+                 * 当然这里的process()方法是同步的，阻塞式的
+                 * 只有这次process()方法执行完成，才能执行下一个。
+                 * 因此，chap3这个版本一次只能处理一个客户端请求，不能处理并发请求
+                 */
+                socket = serverSocket.accept();
                 HttpProcessor processor = new HttpProcessor();
                 processor.proccess(socket);
 

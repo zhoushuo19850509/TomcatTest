@@ -108,33 +108,9 @@ public class HttpResponse implements HttpServletResponse{
 
     }
 
-    @Override
-    public int getStatus() {
-        return 0;
-    }
-
-    @Override
-    public String getHeader(String s) {
-        return null;
-    }
-
-    @Override
-    public Collection<String> getHeaders(String s) {
-        return null;
-    }
-
-    @Override
-    public Collection<String> getHeaderNames() {
-        return null;
-    }
 
     @Override
     public String getCharacterEncoding() {
-        return null;
-    }
-
-    @Override
-    public String getContentType() {
         return null;
     }
 
@@ -165,20 +141,12 @@ public class HttpResponse implements HttpServletResponse{
         }
     }
 
-    @Override
-    public void setCharacterEncoding(String s) {
-
-    }
 
     @Override
     public void setContentLength(int i) {
 
     }
 
-    @Override
-    public void setContentLengthLong(long l) {
-
-    }
 
     @Override
     public void setContentType(String s) {
